@@ -1,1 +1,2 @@
 # dsa_learning
+This is a repo used to store the programs and record the learning process of Rui Wang in the course DATA STRUCTURE AND ALGORITHM. All programs written in this semester(2016 fall) will be named according to their function and preserved. For example, the program longest_common_sequence.cpp is used to solve the problem of finding the longest common sequence of two strings using dynamic programming. All programs in this repo will be written in C++.
