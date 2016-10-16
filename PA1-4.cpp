@@ -15,15 +15,13 @@ ele* trailer = new ele;
 
 ele* insert(ele* p, int num_people, int id)
 {
-	//ele *p = start;
 	int i = 1;
 	while (i < num_people)
 	{   
 		if (p != header && p != trailer) i++;
-		//cout<<i<<" "<<endl;
 		p = p -> succ;
 	}
-	while (p == header || p == trailer) p = p -> succ;
+	while (p == header || p == trailer) p = p -> succ; // in case p points to header or trailer
 
 	ele *q = new ele;
 	q -> id = id;
@@ -31,13 +29,7 @@ ele* insert(ele* p, int num_people, int id)
 	q -> succ -> pre = q;
 	q -> pre = p;
 	p -> succ = q;
-	//delete header;
-	//cout<<endl;
-	p = header -> succ;
-	/*cout<<"OK"<<endl;
-	for (int i = 0; i < 10; i++)
-		{cout<< p->id<<" "; p = p->succ; if (p == trailer) break;}
-	cout<<endl;*/
+
 	return q;
 }
 
@@ -46,7 +38,7 @@ int main()
 	int m,n;
 	scanf("%d%d", &n, &m);
 	int id, tot = 0, num_people;
-
+    /* Below: deal with the first candidate */
 	scanf("%d", &id);
 	ele *q = new ele;
 	q -> id = id;
@@ -55,21 +47,20 @@ int main()
     trailer -> succ = header; header -> pre = trailer;
     ele *last = q;
     tot ++;
-    //cout<<"OK"<<endl;
+    /* ABOVE: deal with the first candidate */
+
+    /* BELOW: deal with all the new comers */
     int i;
 	for (i = 1; i < n; i++)
 	{
 		scanf("%d", &id);
-		//tot != 0 ? num_people = m % tot : num_people = 0;
-		//cout<<num_people<<endl;
-		last = insert(last, m, id);
+		last = insert(last, m % (m + tot), id);
 		tot ++;
 	}
-///////OK///////
-	//cout<<tot<<endl;
+
 	i = 0;
 	while (i < tot)
-	{   if (last != header && last != trailer)
+	{   if (last != header && last != trailer) //skips the header and trailer
 		   { 
 		   	if (i < tot-1)
 		   	 printf("%d ", last -> id); 
@@ -77,7 +68,7 @@ int main()
 		   	 printf("%d\n", last -> id);
 		   	i++; 
 		   }
-		last = last -> pre;
+		last = last -> pre; //go next (inverse order) for any element, header & trailer included
 	}
 	return 0;
 }
