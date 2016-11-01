@@ -5,9 +5,11 @@ using namespace std;
 
 class stack{
 	int *a;
+	int sz;     // the size of a
 	int number; // the total number of members currently in the stack
 public:
 	stack(int n);
+	//stack(stack &ss);
 	~stack();
 	int pop();
 	int get();
@@ -15,11 +17,11 @@ public:
 	int num();
 };
 
-stack::stack(int n) : number(0){
+stack::stack(int n) : number(0), sz(n) {
 	a = new int [n];
 }
 
-stack::~stack() {}
+stack::~stack() { delete[] a; } 
 
 int stack::pop(){
 	return (a[--number]);
@@ -27,9 +29,9 @@ int stack::pop(){
 
 int stack::get(){
 	if (number > 0)
-		return (a[number-1]);
+		return (a[number - 1]);
 	else
-		return 0; // when there's no member in the stack
+		return 0; // when there's no ele in the stack
 }
 
 int stack::push(int x){
@@ -52,14 +54,15 @@ bool check(stack &s, int x, int const &m){
 }
 
 int main(){
+
 	int n, m, x;
 	bool if_possible = true;              // changes to "false" if the sequence is impossible
 	scanf("%d%d", &n, &m);
-	stack s(m);
+	stack s(n);
 
 	for (int i = 0; i < n; i++){
 		scanf("%d", &x);
-		if (!check(s, x, m)) {             // simulates the operation of a stack
+		if (!check(s, x, m)) {            // simulates the operation of a stack
 			printf("No\n");
 			if_possible = false;
 			break;                        // no need to read in any more
