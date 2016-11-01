@@ -7,13 +7,11 @@ class Stack
 {
 public:
 	Stack(int n);
-	Stack(Stack &x);
 	~Stack();
 	bool empty();
 	void push(int);
 	int pop();
 	int top();
-	void debug();
 private:
 	int length;
 	int *s;
@@ -24,15 +22,9 @@ Stack::Stack(int n) : length(0)
 	s = new int [n];
 }
 
-Stack::Stack(Stack &x) : length(x.length)
-{
-	s = new int [sizeof(x.s)];
-	for (int i = 0; i < length; i++) s[i] = x.s[i];
-}
-
 Stack::~Stack()
 {
-	/* delete[] s */
+	delete[] s;
 }
 
 bool Stack::empty()
@@ -52,7 +44,7 @@ int Stack::pop()
 
 int Stack::top()
 {
-	return s[length - 1];
+	return s[length - 1]; // index ranges from 0 to length - 1
 }
 
 int larger(int a, int b);
@@ -66,15 +58,14 @@ public:
 	int dequeap();
 	int max();
 	int mv();
-	void debug();
 private:
-	Stack sl, sr, ml, mr; // left stack, right stack
+	Stack sl, sr, ml, mr; // stack_left , stack_right, max_left, max_right
 };
 
 Queap::Queap(int n) : sl(n), sr(n), ml(n), mr(n)
 {
 	// ml, mr are the shadow stacks which
-	// store the largest number before a member in the initial stack
+	// store the largest number before a member in stack_l, stack_r
 }
 
 Queap::~Queap()
@@ -101,11 +92,11 @@ int Queap::max()
 {
 	if (sl.empty())
 	{
-		return mv();                        // transport the right stack to the left
+		return mv();                        // transport the right stack to the left and return the largest
 	}
 	else if (sr.empty())
 	{
-		return ml.top();
+		return ml.top();                    // return left largest if nothing's in the right stack
 	}
 	else return larger(ml.top(), mr.top()); // the largest num must be either in the left or the right stack
 }
@@ -119,30 +110,9 @@ int Queap::mv()
 	{
 		sl.push(sr.top());
 		ml.push(larger(ml.top(), sr.pop()));
-		mr.pop();
+		mr.pop();                           // the right max stack is of no use in mv, pop directly
 	}
-	//cout<<"mv:";
-	//debug();
-	//cout<<"mv"<<endl;
-	return ml.top();
-}
-
-void Stack::debug()
-{
-	for (int i = 0; i < length; i++)
-		cout<<" "<<s[i];
-}
-
-void Queap::debug()
-{
-	sl.debug();
-	cout<<" "<<endl;
-	sr.debug();
-	cout<<endl;
-	ml.debug();
-	cout<<" "<<endl;
-	mr.debug();
-	cout<<endl;
+	return ml.top();                        // in fun max(), ml.top() will be of use (as the maximum)
 }
 
 int larger(int a, int b)
@@ -168,7 +138,6 @@ int main()
 			case 'M': printf("%d\n", q.max());
 			          break;
 		}
-		//q.debug();
 	}
 	return 0;
 }
