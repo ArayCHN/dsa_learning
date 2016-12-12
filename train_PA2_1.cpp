@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <iostream>
 
 using namespace std;
 
@@ -9,12 +8,11 @@ class stack{
 	int number; // the total number of members currently in the stack
 public:
 	stack(int n);
-	//stack(stack &ss);
 	~stack();
 	int pop();
 	int get();
 	int push(int);
-	int num();
+	int num();  // returns the current length of the stack
 };
 
 stack::stack(int n) : number(0), sz(n) {
@@ -31,7 +29,7 @@ int stack::get(){
 	if (number > 0)
 		return (a[number - 1]);
 	else
-		return 0; // when there's no ele in the stack
+		return 0; // when there's no element in the stack
 }
 
 int stack::push(int x){
@@ -47,7 +45,7 @@ static int tot; // the next number to push into the stack
 
 bool check(stack &s, int x, int const &m){
 	if ((x <= tot) && s.get() != x) return false; // if x is in the stack but not on top, must be false
-	while (s.get() != x) s.push(++tot);
+	while (s.get() != x) s.push(++tot);           // push into the stack until x is in and can be popped out
 	if ((s.num() > m)) return false; 
 	s.pop();
 	return true;
@@ -63,9 +61,9 @@ int main(){
 	for (int i = 0; i < n; i++){
 		scanf("%d", &x);
 		if (!check(s, x, m)) {            // simulates the operation of a stack
-			printf("No\n");
+			printf("No\n");               // once it is found that an output is invalid,
 			if_possible = false;
-			break;                        // no need to read in any more
+			break;                        // there's no need to read in any more
 		}
 	}
 

@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <iostream>
 
 using namespace std;
 
@@ -14,7 +13,7 @@ public:
 	int top();
 private:
 	int length;
-	int *s;
+	int *s; // where the stack is stored
 };
 
 Stack::Stack(int n) : length(0)
@@ -57,12 +56,12 @@ public:
 	void enqueap(int);
 	int dequeap();
 	int max();
-	int mv();
+	int mv();             // to move the right stack to the left
 private:
 	Stack sl, sr, ml, mr; // stack_left , stack_right, max_left, max_right
 };
 
-Queap::Queap(int n) : sl(n), sr(n), ml(n), mr(n)
+Queap::Queap(int n) : sl(n), sr(n), ml(n), mr(n) // all stacks could potentially become larger than m during check()
 {
 	// ml, mr are the shadow stacks which
 	// store the largest number before a member in stack_l, stack_r
@@ -130,12 +129,12 @@ int main()
 		char c;
 		scanf(" %c", &c);
 		switch (c){
-			case 'E': scanf("%d", &x);
+			case 'E': scanf("%d", &x);              // to add an element into the stack
 			          q.enqueap(x);
 			          break;
-			case 'D': printf("%d\n", q.dequeap());
+			case 'D': printf("%d\n", q.dequeap());  // to delete an element, and output it
 			          break;
-			case 'M': printf("%d\n", q.max());
+			case 'M': printf("%d\n", q.max());      // to output the maximum value of two stacks
 			          break;
 		}
 	}
