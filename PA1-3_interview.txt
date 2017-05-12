@@ -1,0 +1,5 @@
+create a list with each element representing a candidate.
+store the position of the latest candidate.
+simulate the process: starting from the latest candidate, go step by step to the desired position.
+insert the new element to the destination.
+output all elements in the inverse order.

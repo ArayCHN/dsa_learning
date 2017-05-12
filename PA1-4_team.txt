@@ -1,0 +1,6 @@
+simulates the process of choosing members.
+Each time, A, B and C chooses their favourite member in order.
+For one coach, if the favourite has been chosen, then go to the second favourite one. (and down to the third)
+Every time, exactly 3 people will be chosen, and every coach will definitely get a member until
+when finally after a loop, there are less than 3 members left for chosen. Deal with this case outside the loop.
+uses hash[] to store which coach the member belong to.

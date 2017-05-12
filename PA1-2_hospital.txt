@@ -1,0 +1,4 @@
+uses 'greedy' algorithm.
+if the hospital moves from i to i-1, then the total cost of villiages on the left( <= i-1) will be decreased by 1*(sum of weight), and right( >= i) increased by 1*(sum of weight).
+So as long as the sum of weight on the left outweighs the right, we move the hospital to the left by one village.
+So we move step by step until the point where moving one more step, and the total cost increases.

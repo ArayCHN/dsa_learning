@@ -1,4 +1,12 @@
-/**/
+/*
+A mimic version of vector in STL lib.
+WANG RUI 2016.10.4
+
+***TO BE ADDED:
+1.search in a sorted vector
+2.sort
+3.unify in a sorted vector
+*/
 #include <cstdio>
 #include <iostream>
 

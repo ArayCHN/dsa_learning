@@ -1,0 +1,5 @@
+Note: this program did not apply Bitmap, instead, it uses timestamp which has the same effect as 'top' in Bitmap.
+uses rec as a timestamp.
+If the timestamp of a certain person matches rec (== rec), then he or she is at work.
+shutting down will change rec.
+adding a person will change his timestamp.
